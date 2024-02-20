@@ -64,12 +64,13 @@ export default function HomePage() {
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                 James Murphy and the Giant Fishing Expedition teaches kids about
-                the importance of every vote and respecting differing viewpoints
-                is a delightful tale of friendship and discovery. The book
-                cleverly tackles complex themes like democracy and integrity in
-                a way that is accessible to children and man-children alike.
-                Each page is filled with wonder and excitement, making it a
-                perfect read for young explorers.
+                the importance of every vote and respecting differing
+                viewpoints. The book is a delightful tale of friendship and
+                discovery as citizens face the wrath of a sad, sad man, cleverly
+                tackling complex themes like democracy and integrity in a way
+                that is accessible to children and man-children alike. Each page
+                is filled with wonder and excitement, making it a perfect read
+                for young explorers.
               </p>
             </div>
           </div>
@@ -137,10 +138,10 @@ export default function HomePage() {
             <div className="space-y-1">
               <h3 className="text-xl font-bold">Charming and Enlightening</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                &quot;Captures the essence of a small town&apos;s spirit and
-                the importance of honest elections. It&apos;s a wonderful tool
-                for teaching kids about civic responsibility.&quot; - Sarah
-                Brown, Elementary School Teacher
+                &quot;Captures the essence of a small town&apos;s spirit and the
+                importance of honest elections. It&apos;s a wonderful tool for
+                teaching kids about civic responsibility.&quot; - Sarah Brown,
+                Elementary School Teacher
               </p>
             </div>
           </div>
