@@ -61,6 +61,8 @@ export default function HomePage() {
             src={content.hero.image.src}
             width="600"
             loading="eager"
+            placeholder="blur"
+            priority={true}
           />
           <div className="flex items-center justify-center lg:p-0">
             <div className="flex flex-col justify-center space-y-2">
