@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { content } from "@/lib/content";
-import heropic from "@/public/jimmycover.webp";
 
 export interface ReviewItemProps {
   title: string;
@@ -58,9 +57,9 @@ export default function HomePage() {
           <Image
             alt={content.hero.image.alt}
             className="mx-auto aspect-[3/4] overflow-hidden rounded-xl object-contain object-center lg:order-last"
-            // height="800"
-            src={heropic}
-            // width="600"
+            height="800"
+            src={content.hero.image.src}
+            width="600"
             loading="eager"
             placeholder="blur"
             priority={true}
