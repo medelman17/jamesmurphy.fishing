@@ -60,6 +60,7 @@ export default function HomePage() {
             height="800"
             src={content.hero.image.src}
             width="600"
+            loading="eager"
           />
           <div className="flex items-center justify-center lg:p-0">
             <div className="flex flex-col justify-center space-y-2">
