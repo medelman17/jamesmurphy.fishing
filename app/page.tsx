@@ -1,14 +1,41 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/3Nh5JmpC1Xw
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import Link from "next/link";
 import Image from "next/image";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { content } from "@/lib/content";
+
+export interface ReviewItemProps {
+  title: string;
+  body: string;
+  author: string;
+}
+
+function ReviewItem({ title, body, author }: ReviewItemProps) {
+  return (
+    <div className="space-y-1">
+      <h3 className="text-xl font-bold">{title}</h3>
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        &quot;{body}&quot; - {author}
+      </p>
+    </div>
+  );
+}
+
+export interface ReferenceItemProps {
+  title: string;
+  url: string;
+}
+
+function ReferenceItem({ title, url }: ReferenceItemProps) {
+  return (
+    <li className="py-2">
+      <Link
+        href={url}
+        className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400"
+      >
+        ✅ {title}
+      </Link>
+    </li>
+  );
+}
 
 export default function HomePage() {
   return (
@@ -16,18 +43,11 @@ export default function HomePage() {
       <div className="bg-gray-50 py-6 lg:py-12">
         <div className="container grid items-center gap-4 px-4 text-center md:px-6 lg:gap-10">
           <div className="space-y-3">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-              James Murphy and the Giant Fishing Expedition{" "}
+            <h1 className="mx-auto max-w-[800px] text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+              {content.hero.title}
             </h1>
-            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              The story of Atlantic Highlands, NJ -- a small town that faces big
-              challenges when a losing mayoral candidate questions his
-              constituents right to vote -- leading to a community-wide
-              discussion about honesty, respect, and the importance of treating
-              neighbors kindly. Join Jimmy as he learns an expensive lesson
-              about wasting judicial resources, irrepreably harming his own
-              reputation, and why most people in town will forever remember him
-              to be a huge dick.
+            <p className="mx-auto max-w-[800px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              {content.hero.body}
             </p>
           </div>
         </div>
@@ -35,23 +55,25 @@ export default function HomePage() {
       <div className="border-t border-b divide-y">
         <div className="container grid lg:grid-cols-2 py-6 space-y-6 lg:space-y-0 lg:space-x-6">
           <Image
-            alt="Cover"
+            alt={content.hero.image.alt}
             className="mx-auto aspect-[3/4] overflow-hidden rounded-xl object-contain object-center lg:order-last"
             height="800"
-            src="/jimmycover.webp"
+            src={content.hero.image.src}
             width="600"
           />
-          <div className="flex items-center justify-center p-6 lg:p-0">
+          <div className="flex items-center justify-center lg:p-0">
             <div className="flex flex-col justify-center space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                James Murphy and the Giant Fishing Expedition
+                {content.hero.title}
               </h2>
-              <p className="text-2xl font-bold tracking-tighter">By ChatGPT</p>
               <p className="text-2xl font-bold tracking-tighter">
-                Illustrated by DALL-E
+                By {content.credits.author}
               </p>
               <p className="text-2xl font-bold tracking-tighter">
-                Published by Michael Edelman
+                Illustrated by {content.credits.illustrator}
+              </p>
+              <p className="text-2xl font-bold tracking-tighter">
+                Published by {content.credits.publisher}
               </p>
             </div>
           </div>
@@ -60,25 +82,23 @@ export default function HomePage() {
           <div className="flex items-center justify-center p-6 lg:p-0">
             <div className="flex flex-col justify-center space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                About the Book
+                {content.about.title}
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                James Murphy and the Giant Fishing Expedition teaches kids about
-                the importance of every vote and respecting differing
-                viewpoints. The book is a delightful tale of friendship and
-                discovery as citizens face the wrath of a sad, sad man, cleverly
-                tackling complex themes like democracy and integrity in a way
-                that is accessible to children and man-children alike. Each page
-                is filled with wonder and excitement, making it a perfect read
-                for young explorers.
+                {content.about.body}
               </p>
             </div>
           </div>
           <div className="flex items-center justify-center p-6 lg:p-0">
             <div className="flex flex-col justify-center space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Coming Soon!
+                Based on a True Story!
               </h2>
+              <ul>
+                {content.about.references.map((reference, i) => (
+                  <ReferenceItem key={i} {...reference} />
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -87,63 +107,16 @@ export default function HomePage() {
         <div className="container grid items-center gap-4 px-4 text-center md:px-6 lg:gap-10">
           <div className="space-y-3">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Reviews
+              {content.testimonials.title}
             </h2>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              See what other young readers and their parents are saying about
-              the book.
+              {content.testimonials.body}
             </p>
           </div>
           <div className="grid max-w-[700px] mx-auto gap-4">
-            <div className="space-y-1">
-              <h3 className="text-xl font-bold">
-                A Heartwarming Lesson in Democracy
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                &quot;This book brilliantly introduces children to the values of
-                community and fairness. The characters are relatable, and the
-                story is engaging. A must-read for young citizens!&quot; - Jane
-                Doe, Educator
-              </p>
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-xl font-bold">Vivid and Impactful</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                &quot;The illustrations are stunning, and the story is both
-                educational and entertaining. It teaches kids about the
-                importance of every vote and respecting differing
-                viewpoints.&quot; - John Smith, Parent Blogger
-              </p>
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-xl font-bold">
-                Engaging and Thought-Provoking
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                &quot;This book cleverly tackles complex themes like democracy
-                and integrity in a way that&apos;s accessible to children. A
-                great conversation starter for families! &quot; - Emily Johnson,
-                Children&apos;s Book Reviewer
-              </p>
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-xl font-bold">A Timely Tale of Tolerance</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                &quot;In an age of division, this book offers a refreshing
-                perspective on community and acceptance. It&apos;s a gentle
-                reminder of the power of kindness and truth &quot; - David Lee,
-                Librarian
-              </p>
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-xl font-bold">Charming and Enlightening</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                &quot;Captures the essence of a small town&apos;s spirit and the
-                importance of honest elections. It&apos;s a wonderful tool for
-                teaching kids about civic responsibility.&quot; - Sarah Brown,
-                Elementary School Teacher
-              </p>
-            </div>
+            {content.testimonials.reviews.map((review, i) => (
+              <ReviewItem key={i} {...review} />
+            ))}
           </div>
         </div>
       </section>
